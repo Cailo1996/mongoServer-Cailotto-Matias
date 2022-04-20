@@ -8,7 +8,7 @@ const {check, validationResult, body} = require('express-validator');
 router.get('/ver', vistaGatitos);
 router.post('/crear',[
     check("name").not().isEmpty().withMessage("El nombre es requerido")
-], crearGatito);
+], crearGatito); 
 router.get("/ver/:id", vistaUnGato)
 router.put("/editar/:id", editarGato)
 router.delete("/eliminar/:id", eliminarGato)
