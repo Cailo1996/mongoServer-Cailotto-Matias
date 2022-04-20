@@ -13,7 +13,6 @@ const vistaGuitarras = async (req, res) => {
 const crearGuitarra = async (req, res) => {
   console.log(validationResult(req));
   console.log(req.body);
-
   const error = validationResult(req)
   if (error.isEmpty()) {
     const { brand, model, year, color  } = req.body;
@@ -31,11 +30,18 @@ const vistaUnaGuitarra = async (req, res) => {
 };
 
 const editarGuitarra = async (req, res) => {
-  const { id } = req.params;
-  const { brand, model, year, color } = req.body;
+  console.log(validationResult(req));
   console.log(req.body);
-  await Guitar.findByIdAndUpdate(id, { brand, model, year, color });
-  res.json({ msg: "Guitarra editada", id, brand, model, year, color  });
+  const error = validationResult(req)
+  if (error.isEmpty()) {
+    const { id } = req.params;
+    const { brand, model, year, color } = req.body;
+    console.log(req.body);
+    await Guitar.findByIdAndUpdate(id, { brand, model, year, color });
+    res.json({ msg: "Guitarra editada", id, brand, model, year, color  });
+} else {
+  res.json(error);
+}
 };
 
 const eliminarGuitarra = async (req, res) => {
