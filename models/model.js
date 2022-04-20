@@ -5,7 +5,6 @@ const storeSchema = new Schema({
     brand: {
         type: String,
         required: true,
-        unique: true,
     },
     model: {
         type: String,
