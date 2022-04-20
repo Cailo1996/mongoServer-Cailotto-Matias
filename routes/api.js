@@ -12,13 +12,11 @@ const { check, validationResult, body } = require("express-validator");
 /* GET users listing. */
 router.get("/ver", vistaGuitarras);
 
-router.get(
-  "/buscar",
-  [check("_id").isLength(24).withMessage("El id debe ser de 24 caracteres")],
-
-
-  vistaUnaGuitarra
-);
+router.get("/buscar",
+[
+    check("id").isMongoId().withMessage("El id solicitado no existe")
+],
+vistaUnaGuitarra);
 
 router.post(
   "/crear",

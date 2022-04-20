@@ -25,8 +25,15 @@ const crearGuitarra = async (req, res) => {
 };
 
 const vistaUnaGuitarra = async (req, res) => {
-  const Guitarra = await Guitar.findById(req.body.id);
-  res.json({ Guitarra });
+  console.log(validationResult(req));
+  console.log(req.body);
+  const error = validationResult(req)
+  if (error.isEmpty()) {
+    const Guitarra = await Guitar.findById(req.body.id);
+    res.json({ Guitarra });
+  } else {
+    res.json(error);
+  }
 };
 
 const editarGuitarra = async (req, res) => {
