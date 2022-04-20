@@ -13,9 +13,9 @@ const vistaGuitarras = async (req, res) => {
 const crearGuitarra = async (req, res) => {
   console.log(validationResult(req));
   console.log(req.body);
-  const error = validationResult(req)
+  const error = validationResult(req);
   if (error.isEmpty()) {
-    const { brand, model, year, color  } = req.body;
+    const { brand, model, year, color } = req.body;
     const Guitarra = new Guitar({ brand, model, year, color });
     await Guitarra.save();
     res.json({ Guitarra, msg: "Traoaaaan" });
@@ -27,9 +27,9 @@ const crearGuitarra = async (req, res) => {
 const vistaUnaGuitarra = async (req, res) => {
   console.log(validationResult(req));
   console.log(req.body);
-  const error = validationResult(req)
+  const error = validationResult(req);
   if (error.isEmpty()) {
-    const Guitarra = await Guitar.findById(req.body.id);
+    const Guitarra = await Guitar.findById(req.params.id);
     res.json({ Guitarra });
   } else {
     res.json(error);
@@ -39,28 +39,28 @@ const vistaUnaGuitarra = async (req, res) => {
 const editarGuitarra = async (req, res) => {
   console.log(validationResult(req));
   console.log(req.body);
-  const error = validationResult(req)
+  const error = validationResult(req);
   if (error.isEmpty()) {
     const { id } = req.params;
     const { brand, model, year, color } = req.body;
     console.log(req.body);
     await Guitar.findByIdAndUpdate(id, { brand, model, year, color });
-    res.json({ msg: "Guitarra editada", id, brand, model, year, color  });
-} else {
-  res.json(error);
-}
+    res.json({ msg: "Guitarra editada", id, brand, model, year, color });
+  } else {
+    res.json(error);
+  }
 };
 
 const eliminarGuitarra = async (req, res) => {
   console.log(validationResult(req));
   console.log(req.body);
-  const error = validationResult(req)
+  const error = validationResult(req);
   if (error.isEmpty()) {
-  const Guitarra = await Guitar.findByIdAndDelete(req.body.id);
-  res.json({ msg: "Guitarra eliminada" });
-} else {
-  res.json(error);
-}
+    const Guitarra = await Guitar.findByIdAndDelete(req.body.id);
+    res.json({ msg: "Guitarra eliminada" });
+  } else {
+    res.json(error);
+  }
 };
 
 module.exports = {
