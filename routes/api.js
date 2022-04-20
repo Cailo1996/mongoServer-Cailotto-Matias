@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {
+    consultaAxios,
   vistaGuitarras,
   crearGuitarra,
   vistaUnaGuitarra,
@@ -8,6 +9,7 @@ const {
   eliminarGuitarra,
 } = require("../controller/controller.js");
 const { check, validationResult, body } = require("express-validator");
+const { default: axios } = require("axios");
 
 /* GET users listing. */
 router.get("/ver", vistaGuitarras);
@@ -71,5 +73,7 @@ router.delete(
   [check("id").isMongoId().withMessage("El id solicitado no existe")],
   eliminarGuitarra
 );
+
+router.get("/pokemon", consultaAxios);
 
 module.exports = router;
