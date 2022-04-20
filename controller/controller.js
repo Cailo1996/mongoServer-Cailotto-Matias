@@ -1,4 +1,4 @@
-const { Cat } = require("../models/model");
+const { Guitar } = require("../models/model");
 const { check, validationResult, body } = require("express-validator");
 
 const vistaUno = (req, res) => {
@@ -6,7 +6,7 @@ const vistaUno = (req, res) => {
 };
 
 const vistaGatitos = async (req, res) => {
-  const gatitos = await Cat.find();
+  const gatitos = await Guitar.find();
   res.json({ gatitos });
 };
 
@@ -16,8 +16,8 @@ const crearGatito = async (req, res) => {
 
   const error = validationResult(req)
   if (error.isEmpty()) {
-    const { name } = req.body;
-    const kitty = new Cat({ name });
+    const { Brand } = req.body;
+    const kitty = new Guitar({ Brand });
     await kitty.save();
     res.json({ kitty, msg: "meow" });
   } else {
@@ -26,20 +26,20 @@ const crearGatito = async (req, res) => {
 };
 
 const vistaUnGato = async (req, res) => {
-  const kitty = await Cat.findById(req.params.id);
+  const kitty = await Guitar.findById(req.params.id);
   res.json({ kitty });
 };
 
 const editarGato = async (req, res) => {
   const { id } = req.params;
-  const { name } = req.body;
+  const { Brand } = req.body;
   console.log(req.body);
-  await Cat.findByIdAndUpdate(id, { name });
-  res.json({ id, name });
+  await Guitar.findByIdAndUpdate(id, { Brand });
+  res.json({ id, Brand });
 };
 
 const eliminarGato = async (req, res) => {
-  const kitty = await Cat.findByIdAndDelete(req.params.id);
+  const kitty = await Guitar.findByIdAndDelete(req.params.id);
   res.json({ msg: "murio", kitty });
 };
 
