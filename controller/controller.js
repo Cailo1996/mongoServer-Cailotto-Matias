@@ -17,17 +17,17 @@ const crearGuitarra = async (req, res) => {
   const error = validationResult(req)
   if (error.isEmpty()) {
     const { brand, model, year, color  } = req.body;
-    const Viola = new Guitar({ brand, model, year, color });
-    await Viola.save();
-    res.json({ Viola, msg: "Traoaaaan" });
+    const Guitarra = new Guitar({ brand, model, year, color });
+    await Guitarra.save();
+    res.json({ Guitarra, msg: "Traoaaaan" });
   } else {
     res.json(error);
   }
 };
 
 const vistaUnaGuitarra = async (req, res) => {
-  const Viola = await Guitar.findById(req.params.id);
-  res.json({ Viola });
+  const Guitarra = await Guitar.findById(req.params.id);
+  res.json({ Guitarra });
 };
 
 const editarGuitarra = async (req, res) => {
@@ -39,8 +39,8 @@ const editarGuitarra = async (req, res) => {
 };
 
 const eliminarGuitarra = async (req, res) => {
-  const Viola = await Guitar.findByIdAndDelete(req.params.id);
-  res.json({ msg: "Corto Cuerdas", Viola });
+  const Guitarra = await Guitar.findByIdAndDelete(req.params.id);
+  res.json({ msg: "Corto Cuerdas", Guitarra });
 };
 
 module.exports = {
