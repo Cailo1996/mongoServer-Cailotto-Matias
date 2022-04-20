@@ -2,10 +2,22 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 const storeSchema = new Schema({
-    Brand: {
+    brand: {
         type: String,
         required: true,
         unique: true,
+    },
+    model: {
+        type: String,
+        required: true,  
+    },
+    year: {
+        type: Number,
+        required: true,
+    },
+    color : {
+        type: String,
+        required: true,
     },
 });
 const Guitar = mongoose.model('Guitar', storeSchema);
