@@ -2,12 +2,24 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 const storeSchema = new Schema({
-    name: {
+    brand: {
         type: String,
         required: true,
-        unique: true,
+        unique: false
+    },
+    model: {
+        type: String,
+        required: true,  
+    },
+    year: {
+        type: Number,
+        required: true,
+    },
+    color : {
+        type: String,
+        required: true,
     },
 });
-const Cat = mongoose.model('Cat', storeSchema);
+const Guitar = mongoose.model('Guitar', storeSchema);
 
-module.exports = {Cat}
+module.exports = {Guitar}
