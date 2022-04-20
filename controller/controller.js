@@ -1,5 +1,6 @@
 const { Guitar } = require("../models/model");
 const { check, validationResult, body } = require("express-validator");
+const axios = require("axios");
 
 const vistaUno = (req, res) => {
   res.render("index", { title: "Express" });
@@ -63,6 +64,17 @@ const eliminarGuitarra = async (req, res) => {
   }
 };
 
+const consultaAxios = async (req, res) => {
+  const resultado = await axios
+    .get("https://pokeapi.co/api/v2/pokemon/155", { timeout: 10000 })
+    .catch((err) => {
+      err.origin = "Error Getting Pokemon";
+      throw err;
+    });
+  console.log(resultado.data);
+  res.json(resultado.data.types);
+};
+
 module.exports = {
   vistaUno,
   crearGuitarra,
@@ -70,4 +82,5 @@ module.exports = {
   vistaUnaGuitarra,
   editarGuitarra,
   eliminarGuitarra,
+  consultaAxios,
 };
