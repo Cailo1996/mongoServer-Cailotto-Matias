@@ -12,11 +12,11 @@ const { check, validationResult, body } = require("express-validator");
 /* GET users listing. */
 router.get("/ver", vistaGuitarras);
 
-router.get("/buscar",
-[
-    check("id").isMongoId().withMessage("El id solicitado no existe")
-],
-vistaUnaGuitarra);
+router.get(
+  "/buscar",
+  [check("id").isMongoId().withMessage("El id solicitado no existe")],
+  vistaUnaGuitarra
+);
 
 router.post(
   "/crear",
@@ -62,6 +62,10 @@ router.put(
   ],
   editarGuitarra
 );
-router.delete("/eliminar/:id", eliminarGuitarra);
+router.delete("/eliminar", 
+[check("id")
+    .isMongoId()
+.withMessage("El id solicitado no existe")],
+eliminarGuitarra);
 
 module.exports = router;

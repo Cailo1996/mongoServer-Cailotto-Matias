@@ -6,8 +6,8 @@ const vistaUno = (req, res) => {
 };
 
 const vistaGuitarras = async (req, res) => {
-  const gatitos = await Guitar.find();
-  res.json({ gatitos });
+  const Guitarras = await Guitar.find();
+  res.json({ Guitarras });
 };
 
 const crearGuitarra = async (req, res) => {
@@ -52,8 +52,15 @@ const editarGuitarra = async (req, res) => {
 };
 
 const eliminarGuitarra = async (req, res) => {
-  const Guitarra = await Guitar.findByIdAndDelete(req.params.id);
-  res.json({ msg: "Corto Cuerdas", Guitarra });
+  console.log(validationResult(req));
+  console.log(req.body);
+  const error = validationResult(req)
+  if (error.isEmpty()) {
+  const Guitarra = await Guitar.findByIdAndDelete(req.body.id);
+  res.json({ msg: "Guitarra eliminada" });
+} else {
+  res.json(error);
+}
 };
 
 module.exports = {
