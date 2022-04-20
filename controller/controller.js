@@ -26,7 +26,7 @@ const crearGuitarra = async (req, res) => {
 };
 
 const vistaUnaGuitarra = async (req, res) => {
-  const Guitarra = await Guitar.findById(req.params.id);
+  const Guitarra = await Guitar.findById(req.body.id);
   res.json({ Guitarra });
 };
 
@@ -35,7 +35,7 @@ const editarGuitarra = async (req, res) => {
   const { brand, model, year, color } = req.body;
   console.log(req.body);
   await Guitar.findByIdAndUpdate(id, { brand, model, year, color });
-  res.json({ id, brand, model, year, color });
+  res.json({ msg: "Guitarra editada", id, brand, model, year, color  });
 };
 
 const eliminarGuitarra = async (req, res) => {

@@ -11,7 +11,9 @@ const { check, validationResult, body } = require("express-validator");
 
 /* GET users listing. */
 router.get("/ver", vistaGuitarras);
-router.get("/ver/:id", vistaUnaGuitarra);
+
+router.get("/buscar", vistaUnaGuitarra);
+
 router.post(
   "/crear",
   [
